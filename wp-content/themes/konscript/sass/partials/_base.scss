@@ -1,0 +1,60 @@
+/**
+* Settings
+************************************************/
+
+// Layout
+$grid-columns: 24;
+$grid-totalwidth: 960px;
+$grid-columnwidth: $grid-totalwidth / $grid-columns;
+$grid-margin: 10px;
+$grid-spacing: 40px;
+$grid-spacing-small: 18px;
+$grid-spacing-large: $grid-spacing + ($grid-spacing / 2);
+
+// Color
+$color-primary: #000; 		// Black
+$color-primary-b: #535353; 	// Dark Grey
+$color-primary-c: #7f7f7f; 	// Light Grey
+$color-secondary: #fff;		// White
+$color-tertiary: #fff;		// White
+$color-font: $color-primary;
+$color-link: $color-primary;
+
+// Typography
+$typography-family-primary: 'Arimo', 'Lucida Sans', Lucida, 'Lucida Sans Unicode', 'Lucida Grande', Arial, Helvetica, sans-serif;
+$typography-size-header: 161px;
+$typography-size-subheader: 141px;
+$typography-size-normal: 12px;
+
+/**
+* Blueprint Setup
+************************************************/
+
+// Grid
+$blueprint-grid-columns: $grid-columns;
+$blueprint-container-size: $grid-totalwidth - $grid-margin;
+$blueprint-grid-margin: $grid-margin;
+$blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $blueprint-grid-columns - $blueprint-grid-margin; 
+
+// Colors 
+$link-color: $color-link;
+$link-hover-color: $color-link;
+$link-focus-color: $color-link;
+$link-active-color: $color-link;
+$link-visited-color: $color-link;
+@import "blueprint/colors";
+
+// Fonts
+$blueprint-font-family: $typography-family-primary;
+$blueprint-font-size: $typography-size-normal;
+@import "blueprint/typography";
+
+// rgba fix for IE and other fake browsers
+@mixin rgba-background($color, $hex, $opacity) {    
+	   background-color: rgba($color, $opacity);
+       background:transparent\9;
+       $msvalue: '#'+($opacity*100)+$hex;
+       filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$msvalue},endColorstr=#{$msvalue});
+       zoom: 1;	    
+}
+
