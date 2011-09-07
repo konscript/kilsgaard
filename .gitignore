@@ -15,8 +15,15 @@ wp-content/*
 
 # Ignore everything in the "plugins" directory, except the plugins you specify (see the commented-out examples for hints on how to do this.)
 wp-content/plugins/*
-## !wp-content/plugins/my-single-file-plugin.php
+!wp-content/plugins/nextgen-gallery/nggfunctions.php
 ## !wp-content/plugins/my-directory-plugin/
+
+# Plugins
+wp-content/plugins/nextgen-gallery/*
+
+wp-content/plugins/nextgen-gallery-custom-fields/*
+
+
 
 # Ignore everything in the "themes" directory, except the themes you specify ("konscript" as default)
 wp-content/themes/*
