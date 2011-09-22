@@ -13,11 +13,10 @@ jQuery.noConflict();
 	$(document).ready(function() {	
 
 		var pathIsHashed = goToBase();				
+		showSubmenu();
 		
 		if(pathIsHashed === true){
 			$.cookie("ajax", "true");
-			getMenuHeight();
-			setupSuperfishMenu();			
 			initLinkHasher();	
 			$.address.change(function(event) {											
 				loadPage(event.value);														
@@ -68,16 +67,14 @@ jQuery.noConflict();
 		}						
 		
 		//remove class from previously selected menu item
-		$("#primary-menu li").removeClass("current-menu-item");
+		$("#primary-menu li.current-menu-item, #primary-menu li.active-menu-item").removeAttr("display");		
+		$("#primary-menu li").removeClass("current-menu-item").removeClass("active-menu-item");
 
 		//add class to currently selected menu item
 		var addr = base + page;
 		$("#primary-menu li a[href='" + addr  + "']").parent("li").addClass("current-menu-item");							
-		
-		//update menu
-		showCurrentSubmenu();
-		setMenuHeight();
-		
+		$("#primary-menu li a[href='" + addr  + "']").parents("li").addClass("active-menu-item");									
+			
 		//prepare for next page - remove current content and add loader
 		$('#content').fadeOut("fast").queue(function(){
 			$(this).html('<div id="loader">Loading... </div>').fadeIn("fast").dequeue();
@@ -254,86 +251,71 @@ jQuery.noConflict();
 			var url = $(this).attr('href');
 			return url.replace(base, '');  
 		});  
-	}
+	}	
 	
-
-/*
- * primary menu
- ****************************************************************************/
- 
- 	/**
-	 * Initializes and setups the superfish menu with callback
+	var animationBusy = false;
+	
+	/**
+	 * show submenu on hover	
+	 * current menu: the menu clicked on
+	 * hovered menu: the menu hovering
 	 */
-	function setupSuperfishMenu(){
-		$('div.menu ul:first-child').superfish( {
-			delay: 100,
-			animation: { opacity: 'show', height: 'show' },
-			speed: 300,
-			autoArrows: false,
-			dropShadows: false,
-			onHide: function() {
-				showCurrentSubmenu();
-				}
-			}
-		);
-	}		
-	
-	function setMenuHeight(){		
-
-		// only applies to frontpage - make menu animation
-		if($.address.path() == "/"){
-			$("body.home #primary-menu").hover(		
-				/* hover in */
-				function(){					
-					$("body.home #primary-menu").stop().animate({height: menuHeight}, 400, 'swing');	
-				/*hover out */
-				}, function(){
-					if(menuClickedFlag == false){
-						$("body.home #primary-menu").stop().animate({height: "30px"}, 400, 'swing', function(){
-							$(this).css("height","");
-						});
-					}	
-				});								
-		}else{
-			$("#primary-menu").height(menuHeight + "px");					
-		}		
-	}
-	
-	function getMenuHeight(){
-		var max_height=0;
-		var current_height;
+	function showSubmenu(){
+		$("#primary-menu>li").hover(
 		
-		// find the longest submenu
-		$("#primary-menu li ul.sub-menu").each(function () {
-			current_height = $(this).outerHeight();
-			if ( current_height > max_height ) {
-				max_height = current_height;
+		// on mouse over
+		function(){
+			console.log("Hover in");	
+			// don't do anything if hovering the current-menu-item
+			if(notCurentSubmenu(this)){		
+				animationBusy = true;
+				
+				var currentSubmenu = $(this).children(".sub-menu");
+								
+				// hide all other menus immediately - if there is not submenu for the hovered menu, just slide the others slowly up
+				if(currentSubmenu.length>0){
+					$("#primary-menu li").children("ul.sub-menu").hide();					
+				}else{
+					$("#primary-menu li").children("ul.sub-menu").slideUp(500, "swing");
+				}
+				
+				// show hovered menu
+				currentSubmenu.slideDown("normal", "swing");		
+			}
+		},
+		
+		// on mouse out
+		function(){
+			console.log("Hover out");			
+			if(notCurentSubmenu(this)){	
+				animationBusy = false;			
+				
+				// hide hovered menu
+				$(this).children(".sub-menu").slideUp(500, "swing");
+								
+				// show current menu
+				setTimeout(function() {
+					if(!animationBusy){
+						$("#primary-menu li.current-menu-item ul.sub-menu").slideDown("normal", "swing");					
+					}
+				}, 400 );						
 			}
 		});	
-		menuHeight = max_height + 30;
 	}	
 	
-	/*
-	 * This function overides some dropdown core functionality. It enables the active submenu to become visible.
-	 */
-	function showCurrentSubmenu(){
-		// figure out whether current page is a parent or child (depth)
-		var current;
-        var currentParent = $("#primary-menu li.current-menu-item ul.sub-menu");
-        var currentChild = $("#primary-menu li ul.sub-menu li.current-menu-item").parent(".sub-menu");
-		if (currentParent.length != 0) {
-			current = currentParent;
-		} else if (currentChild.length != 0) {
-			current = currentChild;
-		}
+	/**
+	 * Don't do any animations when hovering the current menu (it is already visible)
+	 **/
+	function notCurentSubmenu(elm){
+		var isCurrentMenuItem = $(elm).hasClass("active-menu-item");
+		var isCurrentMenuItemChild = $(elm).parents("li.menu-item").hasClass("active-menu-item");			
+
+		// don't do anything if hovering the current-menu-item
+		if(isCurrentMenuItem || isCurrentMenuItemChild){
+			return false;
+		}else{
+			return true;
+		}	
+	}
 		
-		// show current if it is hidden and other menu items are not being hovered
-		if ($(current).is(':visible') == false && $('.sfHover').length == 0){
-			var css = {"visibility":"visible", "left" : 0, "top": "2em"};
-			$(current).css(css).fadeIn(300);
-		}		
-	}	
-	
- 	
-	
 })(jQuery);

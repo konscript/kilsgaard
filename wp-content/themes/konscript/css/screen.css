@@ -1482,52 +1482,67 @@ body .removed {
   margin: 0 0 20px 0;
   padding: 0;
   font-size: 11px;
-  min-height: 80px;
   padding: 0 40px;
   float: left;
   clear: both;
 }
 
-/* line 189, ../sass/partials/_master.scss */
+/*
 body.home #primary-menu {
-  height: 30px;
-  min-height: 0px;
+	//height: 30px;
+	min-height: 0px;
 }
-
+*/
 /* Menu list. */
-/* line 195, ../sass/partials/_master.scss */
-#primary-menu li {
+/* line 196, ../sass/partials/_master.scss */
+#primary-menu > li {
   line-height: 24px;
   float: left;
+  margin-right: 20px;
 }
 
-/* line 200, ../sass/partials/_master.scss */
+/* line 202, ../sass/partials/_master.scss */
 #primary-menu li a {
   color: black;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 0 25px 0 0;
 }
 /* line 26, ../../../../../../../../usr/share/compass/frameworks/compass/stylesheets/compass/utilities/links/_link-colors.scss */
 #primary-menu li a:hover {
   color: #7f7f7f;
 }
 
-/* line 207, ../sass/partials/_master.scss */
+/* line 208, ../sass/partials/_master.scss */
 #primary-menu li.current-menu-item > a {
   font-weight: bold;
 }
 
-/* line 211, ../sass/partials/_master.scss */
+/* line 212, ../sass/partials/_master.scss */
 #primary-menu li ul.sub-menu {
+  display: none;
   padding-top: 3px;
-  width: 300px;
+  padding-left: 0;
+}
+/* line 218, ../sass/partials/_master.scss */
+#primary-menu li ul.sub-menu li {
+  list-style: none;
+  float: none;
+  height: 24px;
+}
+/* line 223, ../sass/partials/_master.scss */
+#primary-menu li ul.sub-menu li a {
+  position: absolute;
+}
+
+/* line 228, ../sass/partials/_master.scss */
+#primary-menu li.active-menu-item ul.sub-menu {
+  display: block;
 }
 
 /**
 * Containers below the header and navigation
 ************************************************/
-/* line 220, ../sass/partials/_master.scss */
+/* line 236, ../sass/partials/_master.scss */
 #main {
   display: inline;
   float: left;
@@ -1549,7 +1564,7 @@ body.home #primary-menu {
 * Content
 ************************************************/
 /* Contains site's main content */
-/* line 235, ../sass/partials/_master.scss */
+/* line 251, ../sass/partials/_master.scss */
 #content {
   padding: 0 40px 40px 40px;
 }
@@ -1558,16 +1573,16 @@ body.home #primary-menu {
 /* Archive and search <div> before posts are listed */
 /* Archive and search page titles. */
 /* Entry wrapper <div> */
-/* line 264, ../sass/partials/_master.scss */
+/* line 280, ../sass/partials/_master.scss */
 .post .entry-title {
   margin-bottom: 0;
 }
-/* line 267, ../sass/partials/_master.scss */
+/* line 283, ../sass/partials/_master.scss */
 .post .entry-title a {
   text-decoration: none;
   font-weight: bold;
 }
-/* line 271, ../sass/partials/_master.scss */
+/* line 287, ../sass/partials/_master.scss */
 .post .entry-title a:hover {
   color: #4d4d4d;
 }
@@ -1575,7 +1590,7 @@ body.home #primary-menu {
 /* Post, page, and 404 page titles */
 /* Author and date byline */
 /* Full entries */
-/* line 289, ../sass/partials/_master.scss */
+/* line 305, ../sass/partials/_master.scss */
 .entry-content:first-letter {
   /*
   font-size : 300%;
@@ -1589,17 +1604,17 @@ body.home #primary-menu {
 /* Using <!--nextpage--> */
 /* More link <!--more--> */
 /* Entry metadata */
-/* line 308, ../sass/partials/_master.scss */
+/* line 324, ../sass/partials/_master.scss */
 .entry-meta {
   margin-bottom: 15px;
   color: gray;
 }
-/* line 312, ../sass/partials/_master.scss */
+/* line 328, ../sass/partials/_master.scss */
 .entry-meta a {
   text-decoration: none;
 }
 
-/* line 317, ../sass/partials/_master.scss */
+/* line 333, ../sass/partials/_master.scss */
 .entry-utility {
   border-bottom: 1px solid #999999;
   color: #4d4d4d;
@@ -1618,7 +1633,7 @@ body.home #primary-menu {
 /* Comments section headers/titles */
 /* Comments closed paragraph */
 /* Main comments section */
-/* line 359, ../sass/partials/_master.scss */
+/* line 375, ../sass/partials/_master.scss */
 #comments ol {
   list-style-type: none;
   padding: 0;
@@ -1626,13 +1641,13 @@ body.home #primary-menu {
 
 /* Individual comments (note that WordPress has even/odd backwards) */
 /* Comment avatars */
-/* line 377, ../sass/partials/_master.scss */
+/* line 393, ../sass/partials/_master.scss */
 #comments .comment-author {
   display: inline;
 }
 
 /* Comment metadata */
-/* line 380, ../sass/partials/_master.scss */
+/* line 396, ../sass/partials/_master.scss */
 #comments .comment-meta {
   font-size: 0.9em;
   color: #666;
@@ -1665,7 +1680,7 @@ body.home #primary-menu {
 /* Wrapper for the entire footer */
 /* Subsidiary widget section */
 /* Footer section */
-/* line 472, ../sass/partials/_master.scss */
+/* line 488, ../sass/partials/_master.scss */
 #footer {
   display: inline;
   float: left;
@@ -1683,7 +1698,7 @@ body.home #primary-menu {
 * Overwrites
 **************************************************/
 /* templates which should be wide */
-/* line 489, ../sass/partials/_master.scss */
+/* line 505, ../sass/partials/_master.scss */
 body.page-template-gallery #header,
 body.page-template-columns #header,
 body.page-template-gallery #main,
@@ -1702,79 +1717,79 @@ body.page-template-columns #main {
 }
 
 /* on frontpage main is hidden and only menu is visible  */
-/* line 494, ../sass/partials/_master.scss */
+/* line 510, ../sass/partials/_master.scss */
 body.home #main {
   display: none;
 }
 
 /* template: gallery */
 /* NextGen Gallery, gallery pages */
-/* line 512, ../sass/partials/_master.scss */
+/* line 528, ../sass/partials/_master.scss */
 .ngg-galleryoverview.campaign .ngg-gallery-thumbnail-box:nth-child(even) {
   margin-right: 40px;
 }
 
-/* line 516, ../sass/partials/_master.scss */
+/* line 532, ../sass/partials/_master.scss */
 .ngg-galleryoverview {
   margin-top: 0;
 }
-/* line 519, ../sass/partials/_master.scss */
+/* line 535, ../sass/partials/_master.scss */
 .ngg-galleryoverview .gallery-title {
   font-weight: bold;
   font-size: 2em;
   margin-bottom: 0;
 }
-/* line 525, ../sass/partials/_master.scss */
+/* line 541, ../sass/partials/_master.scss */
 .ngg-galleryoverview .ngg-gallery-thumbnail-box {
   margin: 15px 0 0 10px;
   max-width: 210px;
 }
-/* line 529, ../sass/partials/_master.scss */
+/* line 545, ../sass/partials/_master.scss */
 .ngg-galleryoverview .ngg-gallery-thumbnail-box .ngg-gallery-thumbnail {
   margin: 0;
 }
-/* line 533, ../sass/partials/_master.scss */
+/* line 549, ../sass/partials/_master.scss */
 .ngg-galleryoverview .ngg-gallery-thumbnail-box img {
   border: none;
   margin: 0;
   padding: 0;
 }
-/* line 538, ../sass/partials/_master.scss */
+/* line 554, ../sass/partials/_master.scss */
 .ngg-galleryoverview .ngg-gallery-thumbnail-box img:hover {
   background-color: #fff;
 }
-/* line 543, ../sass/partials/_master.scss */
+/* line 559, ../sass/partials/_master.scss */
 .ngg-galleryoverview .ngg-gallery-thumbnail-box .ngg-gallery-thumbnail {
   text-align: right;
 }
-/* line 544, ../sass/partials/_master.scss */
+/* line 560, ../sass/partials/_master.scss */
 .ngg-galleryoverview .ngg-gallery-thumbnail-box span {
   display: inline;
 }
-/* line 545, ../sass/partials/_master.scss */
+/* line 561, ../sass/partials/_master.scss */
 .ngg-galleryoverview .ngg-gallery-thumbnail-box span.product-title {
   font-weight: bold;
   display: block;
 }
-/* line 546, ../sass/partials/_master.scss */
+/* line 562, ../sass/partials/_master.scss */
 .ngg-galleryoverview .ngg-gallery-thumbnail-box span.product-colors, .ngg-galleryoverview .ngg-gallery-thumbnail-box span.product-sizes {
   font-style: italic;
 }
-/* line 549, ../sass/partials/_master.scss */
+/* line 565, ../sass/partials/_master.scss */
 .ngg-galleryoverview .ngg-navigation {
   padding: 5px 0 5px 0;
   text-align: left;
 }
 
 /* NextGen Gallery, album pages */
-/* line 559, ../sass/partials/_master.scss */
+/* line 575, ../sass/partials/_master.scss */
 .ngg-albumoverview .ngg-album-compact {
   padding: 0 !important;
   margin: 15px 15px 0 0 !important;
   height: auto;
   width: auto;
 }
-/* line 565, ../sass/partials/_master.scss */
+/* line 581, ../sass/partials/_master.scss */
 .ngg-albumoverview .ngg-album-compact .ngg-album-compactbox {
   background: none;
   height: auto;
@@ -1782,20 +1797,20 @@ body.home #main {
   padding: 0 !important;
   margin: 0 !important;
 }
-/* line 572, ../sass/partials/_master.scss */
+/* line 588, ../sass/partials/_master.scss */
 .ngg-albumoverview .ngg-album-compact .ngg-album-compactbox .ngg-album-link img.Thumb {
   border: none;
   width: auto;
   height: auto;
 }
-/* line 579, ../sass/partials/_master.scss */
+/* line 595, ../sass/partials/_master.scss */
 .ngg-albumoverview .ngg-album-compact h4 a {
   font-size: 12px;
   text-decoration: none;
 }
 
 /* Shadowbox overlay in NextGen */
-/* line 587, ../sass/partials/_master.scss */
+/* line 603, ../sass/partials/_master.scss */
 #sb-title-inner, #sb-info-inner, #sb-loading-inner, div.sb-message {
   font-family: "Arimo", "Lucida Sans", Lucida, "Lucida Sans Unicode", "Lucida Grande", Arial, Helvetica, sans-serif;
 }
@@ -1803,14 +1818,14 @@ body.home #main {
 /**
 * Random stuff I don't know where to put
 **************************************************/
-/* line 594, ../sass/partials/_master.scss */
+/* line 610, ../sass/partials/_master.scss */
 #loader {
   margin-left: 150px;
   color: #bbb;
   font-size: 2em;
 }
 
-/* line 601, ../sass/partials/_master.scss */
+/* line 617, ../sass/partials/_master.scss */
 .entry-content .first {
   padding-right: 9%;
   margin-right: 0;

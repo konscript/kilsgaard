@@ -16,8 +16,12 @@
 		<link href='http://fonts.googleapis.com/css?family=Arimo:regular,italic,bold,bolditalic&v1' rel='stylesheet' type='text/css'>
 		<link type="text/css" href="<?php echo THEME_URI . '/css/screen.css'; ?>" rel="stylesheet" media="screen" />
 		<link type="text/css" href="<?php echo THEME_URI . '/css/print.css'; ?>" rel="stylesheet" media="print" />
+		
+		<!--
 		<link type="text/css" href="<?php echo THEME_URI . '/hybrid-core/css/drop-downs.css'; ?>" rel="stylesheet" media="screen" />		
-		<link rel="stylesheet" href="<?php echo THEME_URI; ?>/css/shadowbox.css" type="text/css" />		
+		<link rel="stylesheet" href="<?php echo THEME_URI; ?>/css/shadowbox.css" type="text/css" />
+		-->
+				
 		<script src="<?php echo THEME_URI . '/js/jquery-1.6.1.min.js'; ?>"></script> 
 		<script src="<?php echo THEME_URI . '/js/jquery.backstretch.js'; ?>"></script> 
 		<script src="<?php echo THEME_URI . '/js/jquery.address-1.4.min.js'; ?>"></script> 
