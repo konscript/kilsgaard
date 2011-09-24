@@ -75,7 +75,7 @@ jQuery.noConflict();
 			
 		//prepare for next page - remove current content and add loader
 		$('#content').fadeOut("fast").queue(function(){
-			$(this).html('<div id="loader">Loading... YTES </div>').fadeIn("fast").dequeue();
+			$(this).html('<div id="loader">Loading... </div>').fadeIn("fast").dequeue();
 		});						
 	}
 	
@@ -265,30 +265,20 @@ jQuery.noConflict();
 		function(){
 			// don't do anything if hovering the current-menu-item
 			if(notCurentSubmenu(this)){		
-				submenuLoading = true;
-				
-				var hoveredSubmenu = $(this).children(".sub-menu");				
+				console.log("\n\n");															
+				console.log("<on mouse over>");							
+				submenuLoading = true;							
 	
 				// preserve menu height during animations
-				preserveMenuHeight();			
+				setMinHeight();			
 								
-				// hide all other menus immediately - if there is not submenu for the hovered menu, just slide the others slowly up
-				if(hoveredSubmenu.length>0){
-					$("#primary-menu li").children("ul.sub-menu").hide();					
-				}else{
-					$("#primary-menu li").children("ul.sub-menu").slideUp(500, "swing");
-				}
-				
+				// hide other menus
+				$("#primary-menu li").children("ul.sub-menu").slideUp(100, "swing");
+
 				// show hovered menu
-				hoveredSubmenu.slideDown("fast", "swing", function(){								
-					// remove min-height from menu so it can shrink if it needs				  
-					$('#primary-menu').animate({'min-height': ''}, 500, 'swing');	    					  													
-				});		
-				
-				// if there isnt any sub-menu, remove the min-height anyway
-				if(hoveredSubmenu.length == 0){
-					$('#primary-menu').animate({'min-height': ''}, 500, 'swing');																				
-				}
+				var hoveredSubmenu = $(this).children("ul.sub-menu");				
+				konscriptSlideDown(hoveredSubmenu);
+				console.log("</on mouse over>");											
 			}
 		},
 		
@@ -297,29 +287,25 @@ jQuery.noConflict();
 			if(notCurentSubmenu(this)){	
 				submenuLoading = false;	
 				
-				// preserve menu height during animations
-				preserveMenuHeight();						
+				$("#primary-menu").stop();
 				
-				// hide (previously) hovered menu
-				$(this).children(".sub-menu").slideUp("fast", "swing");
+				// preserve menu height during animations			
+				console.log("<on mouse out>");							
+				console.log("min-height: "+$("#primary-menu").css("min-height"));
+				console.log("height: "+$("#primary-menu").css("height"));	
+				setMinHeight();						
+				
+				// hide hovered menu
+				$(this).children("ul.sub-menu").slideUp(100, "swing");
 																
 				// show current menu if no other submenu is loading
 				setTimeout(function() {
-					if(!submenuLoading){
-					
-						console.log("FEJL I ON MOUSE OUT");
-						var currentSubmenu = $("#primary-menu li.current-menu-item ul.sub-menu");						
-						currentSubmenu.slideDown("normal", "swing", function(){
-							// remove min-height from menu so it can shrink if it needs				  
-							$('#primary-menu').animate({'min-height': ''}, "normal", 'swing');
-						});					
-						
-						// if there isnt any sub-menu, remove the min-height anyway
-						if(currentSubmenu.length == 0){
-							$('#primary-menu').animate({'min-height': ''}, 'normal', 'swing');
-						}												
+					if(!submenuLoading){					
+						var currentSubmenu = $("#primary-menu li.active-menu-item ul.sub-menu");	
+						konscriptSlideDown(currentSubmenu);
 					}
 				}, 400 );						
+				console.log("</on mouse out>");											
 			}
 		});	
 	}	
@@ -339,12 +325,27 @@ jQuery.noConflict();
 		}	
 	}
 	
-	function preserveMenuHeight(){
+	function konscriptSlideDown(elm){
+		elm.slideDown(300, "swing", function(){
+			// remove min-height from menu so it can shrink if it needs				  
+			removeMinHeight();
+		});					
+	
+		// if there isnt any sub-menu, remove the min-height anyway
+		if(elm.length == 0){
+			removeMinHeight();
+		}												
+	}	
+	
+	function setMinHeight(){
 		// get previous submenu (currently visible) and add its height to the menu as a minimum height					
-		var primarymenu = $("#primary-menu");								
-		var primarymenuHeight = primarymenu.height();
+		var primarymenuHeight = $("#primary-menu").height();		
 		$("#primary-menu").css("min-height", primarymenuHeight+"px");	
-		console.log(primarymenuHeight);
+		console.log("set min height: " + primarymenuHeight);		
 	}
-		
+	
+	function removeMinHeight(){
+		console.log("Remove min height"+$("#primary-menu").css("min-height"));
+		$('#primary-menu').animate({'min-height': ''}, "normal", 'swing');
+	}	
 })(jQuery);
