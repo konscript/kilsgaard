@@ -297,7 +297,7 @@ jQuery.noConflict();
 					if(!submenuLoading){					
 						var currentSubmenu = $("#primary-menu li.active-menu-item ul.sub-menu");	
 						konscriptSlideDown(currentSubmenu, function(){
-							var currentSubmenuHeight = currentSubmenu.height()+20;
+							var currentSubmenuHeight = currentSubmenu.height()+27;
 							setPrimaryMenuHeight(currentSubmenuHeight);						
 						});
 					}
