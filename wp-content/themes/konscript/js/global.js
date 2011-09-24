@@ -6,7 +6,7 @@ jQuery.noConflict();
 	var bsFlag = false;
 	var menuHeight = 0;
 	var ShadowboxFlag = false;
-	var menuClickedFlag = false;
+	
 	/** 
 	 * Run on pageload (document ready)
 	 */
@@ -243,8 +243,6 @@ jQuery.noConflict();
 	 */
 	function initLinkHasher(){
 		$('#primary-menu a, a[href*="ajax=true"], .ngg-albumoverview a, .comments-link a, #nav-above a, .post .entry-title a').address(function() { 								
-			//set flag to disable hover animation
-			menuClickedFlag = true;
 			
 			var url = $(this).attr('href');
 			return url.replace(base, '');  
@@ -259,6 +257,7 @@ jQuery.noConflict();
 	 * hovered menu: the menu hovering
 	 */
 	function showSubmenu(){
+
 		$("#primary-menu>li").hover(
 		
 		// on mouse over
@@ -269,8 +268,8 @@ jQuery.noConflict();
 				console.log("<on mouse over>");							
 				submenuLoading = true;							
 	
-				// preserve menu height during animations
-				setMinHeight();			
+				// set primary menu height to max
+				setPrimaryMenuHeight(getMaxPrimaryMenuHeight());			
 								
 				// hide other menus
 				$("#primary-menu li").children("ul.sub-menu").slideUp(100, "swing");
@@ -278,23 +277,18 @@ jQuery.noConflict();
 				// show hovered menu
 				var hoveredSubmenu = $(this).children("ul.sub-menu");				
 				konscriptSlideDown(hoveredSubmenu);
+				
 				console.log("</on mouse over>");											
 			}
 		},
 		
 		// on mouse out
 		function(){
-			if(notCurentSubmenu(this)){	
-				submenuLoading = false;	
-				
+			//if(notCurentSubmenu(this)){	
+				console.log("<on mouse out>");										
+				submenuLoading = false;					
 				$("#primary-menu").stop();
-				
-				// preserve menu height during animations			
-				console.log("<on mouse out>");							
-				console.log("min-height: "+$("#primary-menu").css("min-height"));
-				console.log("height: "+$("#primary-menu").css("height"));	
-				setMinHeight();						
-				
+							
 				// hide hovered menu
 				$(this).children("ul.sub-menu").slideUp(100, "swing");
 																
@@ -302,11 +296,14 @@ jQuery.noConflict();
 				setTimeout(function() {
 					if(!submenuLoading){					
 						var currentSubmenu = $("#primary-menu li.active-menu-item ul.sub-menu");	
-						konscriptSlideDown(currentSubmenu);
+						konscriptSlideDown(currentSubmenu, function(){
+							var currentSubmenuHeight = currentSubmenu.height()+20;
+							setPrimaryMenuHeight(currentSubmenuHeight);						
+						});
 					}
 				}, 400 );						
 				console.log("</on mouse out>");											
-			}
+			//}
 		});	
 	}	
 	
@@ -325,27 +322,34 @@ jQuery.noConflict();
 		}	
 	}
 	
-	function konscriptSlideDown(elm){
-		elm.slideDown(300, "swing", function(){
-			// remove min-height from menu so it can shrink if it needs				  
-			removeMinHeight();
-		});					
+	function konscriptSlideDown(elm, callback){
+		elm.slideDown(300, "swing", callback);					
 	
 		// if there isnt any sub-menu, remove the min-height anyway
 		if(elm.length == 0){
-			removeMinHeight();
+			callback();
 		}												
 	}	
 	
-	function setMinHeight(){
-		// get previous submenu (currently visible) and add its height to the menu as a minimum height					
-		var primarymenuHeight = $("#primary-menu").height();		
-		$("#primary-menu").css("min-height", primarymenuHeight+"px");	
-		console.log("set min height: " + primarymenuHeight);		
-	}
-	
-	function removeMinHeight(){
-		console.log("Remove min height"+$("#primary-menu").css("min-height"));
-		$('#primary-menu').animate({'min-height': ''}, "normal", 'swing');
+	function setPrimaryMenuHeight(height){
+		$("#primary-menu").animate({"height": height+"px"}, 400, "swing");	
 	}	
+		
+	function getMaxPrimaryMenuHeight(){
+		if(menuHeight == 0){	
+			var max_height=0;
+			var current_height;
+
+			// find the longest submenu
+			$("#primary-menu li ul.sub-menu").each(function () {
+				current_height = $(this).outerHeight();
+				if ( current_height > max_height ) {
+					max_height = current_height;
+				}
+			});	
+			menuHeight = max_height + 30;
+		}
+		
+		return menuHeight;
+	}		
 })(jQuery);
