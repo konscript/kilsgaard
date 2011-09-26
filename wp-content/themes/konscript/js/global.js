@@ -6,6 +6,7 @@ jQuery.noConflict();
 	var bsFlag = false;
 	var menuHeight = 0;
 	var ShadowboxFlag = false;
+	var defaultMenuTimeout;
 	
 	/** 
 	 * Run on pageload (document ready)
@@ -262,10 +263,13 @@ jQuery.noConflict();
 		
 		// on mouse over
 		function(){
+			// reset timeout for default submenu
+			clearTimeout(defaultMenuTimeout);
+		
 			// don't do anything if hovering the current-menu-item
 			if(notCurentSubmenu(this)){		
-				console.log("\n\n");															
-				console.log("<on mouse over>");							
+				//console.log("\n\n");															
+				//console.log("<on mouse over>");							
 				submenuLoading = true;							
 	
 				// set primary menu height to max
@@ -278,32 +282,41 @@ jQuery.noConflict();
 				var hoveredSubmenu = $(this).children("ul.sub-menu");				
 				konscriptSlideDown(hoveredSubmenu);
 				
-				console.log("</on mouse over>");											
+				//console.log("</on mouse over>");											
+			}else{
+				// show hovered AND current menu			
+				var hoveredSubmenu = $(this).children("ul.sub-menu");				
+				konscriptSlideDown(hoveredSubmenu);			
 			}
 		},
 		
 		// on mouse out
 		function(){
-			//if(notCurentSubmenu(this)){	
-				console.log("<on mouse out>");										
-				submenuLoading = false;					
+			submenuLoading = false;	
+			
+			if(notCurentSubmenu(this)){	
+				//console.log("<on mouse out>");										
 				$("#primary-menu").stop();
 							
 				// hide hovered menu
 				$(this).children("ul.sub-menu").slideUp(100, "swing");
-																
-				// show current menu if no other submenu is loading
-				setTimeout(function() {
-					if(!submenuLoading){					
-						var currentSubmenu = $("#primary-menu li.active-menu-item ul.sub-menu");	
-						konscriptSlideDown(currentSubmenu, function(){
-							var currentSubmenuHeight = currentSubmenu.height()+27;
-							setPrimaryMenuHeight(currentSubmenuHeight);						
-						});
-					}
-				}, 400 );						
-				console.log("</on mouse out>");											
-			//}
+																				
+				//console.log("</on mouse out>");											
+			}
+			
+			
+			
+			// show current menu if no other submenu is loading
+			defaultMenuTimeout = setTimeout(function() {
+				if(!submenuLoading){				
+					console.log("timeout done!");	
+					var currentSubmenu = $("#primary-menu li.active-menu-item ul.sub-menu");	
+					konscriptSlideDown(currentSubmenu, function(){
+						var currentSubmenuHeight = currentSubmenu.height()+27;
+						setPrimaryMenuHeight(currentSubmenuHeight);						
+					});
+				}
+			}, 800 );					
 		});	
 	}	
 	
