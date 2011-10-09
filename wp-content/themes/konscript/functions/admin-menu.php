@@ -59,7 +59,7 @@ jQuery(document).ready(function() {
   
     <?php settings_fields('omr-settings-group'); ?>  
 <label for="upload_image">
-		<input id="upload_image" type="text" size="80" name="omr_background_image" value="<?php echo get_option('omr_background_image');; ?>" />
+		<input id="upload_image" type="text" size="80" name="omr_background_image" value="<?php echo get_option('omr_background_image'); ?>" />
 		<input id="upload_image_button" type="button" value="Select image" />
 		</label>
     <p class="submit">  
@@ -75,4 +75,4 @@ if($currentBg){
   
 </form>  
 </div>  
-<?php } ?>  
+<?php } 
