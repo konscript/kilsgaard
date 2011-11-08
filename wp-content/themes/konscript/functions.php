@@ -229,6 +229,9 @@ function custom_document_title() {
 	return apply_atomic( 'document_title', esc_attr( $doctitle ) );
 }
 
+// include nginx purge cache
+require_once (TEMPLATEPATH . '/functions/purge_cache.php');  
+
 // Password Protected Page Message
 function custom_password_form($form) {
   $subs = array(
