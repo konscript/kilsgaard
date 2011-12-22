@@ -6,6 +6,7 @@
  */
 ?>
 LALAA TEST FRA sqren
+Nu med rette hooks!
 <!DOCTYPE HTML>
 <html>
 	<head>	
