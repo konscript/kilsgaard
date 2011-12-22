@@ -5,8 +5,6 @@
  * Master template for head-section and body opening with generic elements
  */
 ?>
-LALAA TEST FRA sqren
-Nu med rette hooks!
 <!DOCTYPE HTML>
 <html>
 	<head>	
