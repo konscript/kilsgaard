@@ -88,7 +88,7 @@ jQuery.noConflict();
 	
 		beforePageLoad(page);
 											
-		//remove everything after hash (#) if it exists
+		// remove everything after hash (#) if it exists
 		var positionOfHash = page.indexOf("#");
 		if(positionOfHash > -1){
 			page = page.substring(0, positionOfHash);
@@ -104,7 +104,11 @@ jQuery.noConflict();
 			replaceContent(content);
 		}).error(function() { 
 			//page could not be loaded
-			console.log("An error occured - the page could not be loaded.");
+			console.log("An error occured - the page could not be loaded: " + url);
+			
+			// redirect after 1 second
+			setTimeout(function(){ 	window.location.href = page; }, 1000);
+			
 		});											
 	}
 	
