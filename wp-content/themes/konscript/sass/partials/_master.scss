@@ -1,0 +1,620 @@
+/**
+* Body
+************************************************/
+
+/* Contains everything */
+body {
+	@include blueprint(true);
+	@include blueprint-typography(true);
+	@include blueprint-utilities;
+	@include blueprint-debug;
+	@include blueprint-interaction;
+	padding: 0;
+	margin: 0;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	color: $color-primary;
+	font-size: $typography-size-normal; 
+	line-height: 2em; }
+
+	/* Wrapper for everything inside of the body */
+	#wrapper{
+		@include container;
+	}
+
+/**
+* Elements
+************************************************/
+
+/* Hyperlinks */
+a:link {}
+a:visited {}
+a:hover {}
+a:active {}
+
+/* Headers */
+h1 {}
+h2 {}
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+
+/* Text elements */
+strong {}
+em {}
+cite {}
+abbr {}
+acronym {}
+sup {}
+sub {}
+address {}
+ins {}
+dfn {}
+del {}
+
+/* Paragraphs */
+p {}
+
+/* Unordered lists */
+ul {}
+	ul li {}
+
+/* Ordered lists */
+ol {}
+	ol li {}
+
+/* Defition lists */
+dl {}
+	dt {}
+	dd {}
+
+/* Blockquotes */
+blockquote {}
+	blockquote blockquote {}
+	blockquote em {}
+
+/* Object */
+object {}
+
+/* Code */
+code {}
+pre {}
+pre code {}
+
+/* Tables */
+table {}
+	caption {}
+	tr {}
+	th {}
+	td {}
+
+/* Forms */
+form {}
+	textarea {}
+	input {}
+	label {}
+	option {}
+
+/* Notes */
+.note {}
+
+/* Warnings/Alerts */
+.warning, .alert {}
+
+/* Errors */
+.error {}
+
+/* Downloads */
+.download {}
+
+/* Alignment */
+.left, .alignleft {}
+.right, .alignright {}
+.center, .aligncenter {}
+.block, .alignnone {}
+.clear {}
+
+/**
+* Images
+************************************************/
+
+/* Normal images */
+img {}
+a img {}
+
+/* WP Smilies */
+img.wp-smiley {}
+
+/* Thumbnails */
+.thumbnail {}
+
+/* WP Captions [caption] */
+.wp-caption {}
+	.wp-caption img {}
+	.wp-caption p {}
+
+/* Gallery [gallery] */
+.gallery {}
+	.gallery img {}
+
+/* Avatars */
+.avatar {}
+
+/**
+* Header
+************************************************/
+
+/* Contains site title and tagline */
+#header {
+	@include column(12);
+	@include rgba-background(rgba(255,255,255,0.7), "ffffff", 0.7);
+}	
+
+	/* Site title */
+	#site-title {
+		@include column(12);			
+		margin: 30px 0 20px 0;
+		float: left;
+		clear: both;		
+	}
+		#site-title a {
+			@include column(12);
+			background: url("../img/logo_large_black.png") no-repeat top center;
+			display:block;
+			height: 94px;
+		}
+			#site-title a span {}
+
+	/* Site description/tagline */
+	#site-description {}
+
+/**
+* Primary Menu
+************************************************/
+
+/* Wrapper for entire menu area */
+#primary-menu {
+	list-style: none;
+	/*background-color: black;*/
+	margin: 0 0 20px 0;
+	padding:0;
+	font-size: 11px;
+	//min-height: 80px;
+	padding: 0 $grid-columnwidth;	
+	float: left;
+	clear: both;	
+}
+	/*
+	body.home #primary-menu {
+		//height: 30px;
+		min-height: 0px;
+	}
+	*/
+
+		/* Menu list. */
+		#primary-menu>li {
+			line-height: 24px;
+			float: left;
+			margin-right: 20px;
+		}	
+		
+			#primary-menu li a {
+				@include link-colors($color-primary, $color-primary-c);
+				text-transform:uppercase;
+				text-decoration:none;
+			}
+					
+			#primary-menu li.current-menu-item > a {
+				font-weight: bold;
+			}
+
+				#primary-menu li ul.sub-menu {
+					display:none;
+					padding-top: 3px;
+					//width: 300px;
+					padding-left:0;
+					
+					li {
+						list-style:none;
+						float:none;
+						height: 24px;
+						
+						a{
+							position: absolute;
+						}
+					}
+				}
+				#primary-menu li.active-menu-item ul.sub-menu {
+					display:block;
+				}
+
+/**
+* Containers below the header and navigation
+************************************************/
+
+#main{
+		@include column(12);
+		@include rgba-background(rgba(255,255,255,0.7), "ffffff", 0.7);
+		min-height: 600px;
+}
+
+/* Wrapper for the content and primary/secondary widget sections */
+#container {
+}
+
+	/**
+	* Content
+	************************************************/
+
+	/* Contains site's main content */
+	#content {	
+		padding: 0 $grid-columnwidth $grid-columnwidth $grid-columnwidth;
+	}
+	
+		/* Breadcrumb trail */
+		.breadcrumb {}
+			.breadcrumb-trail {}
+
+		/* Archive and search <div> before posts are listed */
+		.archive-info
+		.author-info {}
+		.term-info
+		.category-info {}
+		.tag-info {}
+		.date-info {}
+		.search-info {}
+
+			/* Archive and search page titles. */
+			.archive-title
+			.author-title {}
+			.term-title {}
+			.category-title {}
+			.tag-title {}
+			.date-title {}
+			.search-title {}
+
+		/* Entry wrapper <div> */
+		.hentry {}
+		.post {
+			.entry-title {
+				margin-bottom: 0;
+						
+				a{
+					text-decoration:none;
+					font-weight:bold;
+				
+					&:hover{
+						color: lighten($color-primary, 30%);
+					}
+				}
+			}
+		}
+		.page {}
+
+			/* Post, page, and 404 page titles */
+			.post-title {}
+			.page-title {}
+			.attachment-title {}
+			.error-404-title {}
+
+			/* Author and date byline */
+			.byline {}
+
+			/* Full entries */
+			.entry-content:first-letter {
+				 /*
+				 font-size : 300%;
+				 font-weight : bold;
+				 float : left;
+				 width : 1em;	
+				 */
+			}
+			
+			/* Excerpts (introduced) */
+			.entry-summary {}
+
+				/* Using <!--nextpage--> */
+				p.page-links a {}
+
+				/* More link <!--more--> */
+				a.more-link {}
+
+			/* Entry metadata */
+			.entry-meta {
+				margin-bottom: 15px;
+				color: lighten($color-primary, 50%);
+				
+				a{
+					text-decoration:none;
+				}
+			}
+			
+			.entry-utility {
+				border-bottom: 1px solid lighten($color-primary, 60%);
+				color: lighten($color-primary, 30%);
+				margin-bottom: 15px;
+				padding-bottom:15px;
+			}
+
+		/* Post series */
+		.series {} 
+			.series-title {}
+
+		/* Navigation links */
+		.navigation-links {}
+			.navigation-links .previous {}
+			.navigation-links .next {}
+
+		/* WP PageNavi (plugin) */
+		.wp-pagenavi {}
+			.wp-pagenavi .pages {}
+			.wp-pagenavi .current {}
+			.wp-pagenavi .extend {}
+			.wp-pagenavi a {}
+
+		/* Attachment image navigation */
+		.navigation-attachment {}
+
+		/**
+		* Comments template
+		************************************************/
+
+		/* Wrapper for entire comments area */
+		#comments-template {}
+
+			/* Comments section headers/titles */
+			.comments-header {}
+			#comments-number {}
+
+			/* Comments closed paragraph */
+			p.comments-closed {}
+
+				/* Main comments section */
+				#comments {}
+					#comments ol {list-style-type: none; padding: 0;}
+
+						/* Individual comments (note that WordPress has even/odd backwards) */
+						#comments li {}
+							#comments li li {}
+								#comments li li li {}
+									#comments li li li li {}
+						#comments li.even {}
+						#comments li.odd {}
+						#comments li.thread-even {}
+						#comments li.thread-odd {}
+						#comments li.author {}
+						#comments li.trackback {}
+						#comments li.pingback {}
+
+							/* Comment avatars */
+							#comments .avatar {}
+
+							#comments .comment-author{display:inline}
+
+							/* Comment metadata */
+							#comments .comment-meta{font-size:0.9em;color: #666; display:inline}
+
+								#comments .comment-meta cite {}
+
+							/* Comment text */
+							#comments .comment-text {}
+
+					/* Paged comments navigation */
+					#comments-template .paged-navigation {}
+						#comments-template .paged-navigation .page-numbers {}
+						#comments-template .paged-navigation .next {}
+						#comments-template .paged-navigation .prev {}
+
+				/* Main comment form div */
+				#respond {}
+
+					/* Comment form title */
+					#reply {}
+
+					/* Comment form elements */
+					p#cancel-comment-reply {}
+					#respond form {}
+						#respond .form-author {}
+							#respond input {}
+						#respond .form-email {}
+						#respond .form-url {}
+						#respond .form-textarea {}
+							#respond textarea {}
+						#respond #submit {}
+							#respond #submit:hover {}
+
+		/**
+		* Utility widget sections (see other widget code below)
+		************************************************/
+
+		/* All utility widget sections (except widgets template) */
+		.utility {}
+
+		/* Before content */
+		#utility-before-content {}
+
+		/* After content */
+		#utility-after-content {}
+
+		/* After post but before comments */
+		#utility-after-single {}
+
+		/* After page but before comments */
+		#utility-after-page {}
+
+		/* Widgets page template widgets */
+		.page-template-widgets #content .widget {}
+
+	/**
+	* Widget sections (Primary and Secondary)
+	************************************************/
+
+	/* Widgets in general */
+	.widget {}
+		.widget-inside {}
+			.widget-title {}
+
+	/* Primary widget section */
+	#primary {}
+		#primary .widget {}
+			#primary .widget-inside {}
+				#primary .widget-title {}
+				#primary .widget ul {}
+					#primary .widget ul li {}
+
+	/* Secondary widget section */
+	#secondary {}
+		#secondary .widget {}
+			#secondary .widget-inside {}
+				#secondary .widget-title {}
+				#secondary .widget ul {}
+					#secondary .widget ul li {}
+
+/**
+* Footer
+************************************************/
+
+/* Wrapper for the entire footer */
+#footer-container {}
+
+	/* Subsidiary widget section */
+	#subsidiary {}
+		#subsidiary .widget {}
+			#subsidiary .widget-inside {}
+				#subsidiary .widget-title {}
+
+	/* Footer section */
+	#footer {
+		@include column(12);
+		display: none;
+	}
+
+		/* Footer extra */
+		#footer .copyright {}
+		#footer .credit {}
+		
+/**
+* Overwrites
+**************************************************/
+
+/* templates which should be wide */
+body.page-template-gallery #header,
+body.page-template-columns #header,
+body.page-template-gallery #main,
+body.page-template-columns #main {
+	@include column(24);
+}
+
+/* on frontpage main is hidden and only menu is visible  */
+body.home #main{
+	display: none;
+}
+
+/* template: gallery */
+body.page-template-gallery {	
+	#main {
+		// background-color: rgba(255, 255, 255, 1);
+	}
+	
+	#content{
+		// padding: 0;
+	}
+}
+	
+/* NextGen Gallery, gallery pages */
+
+
+.ngg-galleryoverview.campaign .ngg-gallery-thumbnail-box:nth-child(even){
+	margin-right: 40px;
+}
+
+.ngg-galleryoverview {
+	margin-top: 0;
+
+	.gallery-title{
+		font-weight: bold;
+		font-size: 2em;
+		margin-bottom: 0;
+	}
+	
+	.ngg-gallery-thumbnail-box{
+		margin: 15px 0 0 10px;
+		max-width: 210px;
+		
+		.ngg-gallery-thumbnail {
+			margin: 0;
+		}
+		
+			img{
+				border: none;
+				margin: 0;
+				padding: 0;			
+			
+				&:hover{
+					background-color: #fff;
+				}
+			}	
+		
+		.ngg-gallery-thumbnail{ text-align:right; }
+		span{display:inline}
+		span.product-title{	font-weight: bold; display:block}				
+		span.product-colors,span.product-sizes{	font-style: italic;}
+	}					
+	
+	.ngg-navigation{
+		padding: 5px 0 5px 0;
+		text-align: left;
+	}
+
+}
+
+/* NextGen Gallery, album pages */
+.ngg-albumoverview {
+
+	.ngg-album-compact {
+		padding: 0 !important;
+		margin: 15px 15px 0 0 !important;		
+		height: auto;
+		width: auto;
+		
+		.ngg-album-compactbox {
+			background: none;
+			height: auto;
+			width: auto;
+			padding: 0 !important;
+			margin: 0 !important;
+		
+			.ngg-album-link img.Thumb {
+				border: none;
+				width: auto;
+				height: auto;	
+			}
+		}
+		
+		h4 a {
+			font-size: $typography-size-normal;
+			text-decoration: none;
+		}
+	}
+}
+
+/* Shadowbox overlay in NextGen */
+#sb-title-inner, #sb-info-inner, #sb-loading-inner, div.sb-message {
+	font-family: $typography-family-primary;
+}
+
+/**
+* Random stuff I don't know where to put
+**************************************************/
+#loader{
+	margin-left: 150px;
+	color: #bbb;
+	font-size: 2em;
+}
+
+// columns
+.entry-content .first {
+	padding-right: 9%;
+	margin-right: 0;
+}
