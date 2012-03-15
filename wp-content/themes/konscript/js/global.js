@@ -351,6 +351,7 @@ jQuery.noConflict();
 	function konscriptSlideDown(elm, callback){
 		//elm.slideDown(300, "swing", callback);					
 		elm.animate({"opacity": "toggle"}, "slow");
+
 		// if there isnt any sub-menu, remove the min-height anyway
 		if(elm.length == 0){
 			callback();
